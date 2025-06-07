@@ -9,7 +9,11 @@ import { MOCK_CLIENTES } from '../../../data/mock';
 @Component({
   selector: 'lista-clientes',
   standalone: true,
-  imports: [CommonModule, FilterPipe, FormsModule],
+  imports: [
+    CommonModule,
+    FilterPipe,
+    FormsModule
+  ],
   templateUrl: './lista-clientes.component.html',
   styleUrl: './lista-clientes.component.css'
 })

@@ -1,0 +1,80 @@
+<div class="h-full bg-white border-l border-gray-200 overflow-auto" *ngIf="contratoSelecionado">
+  <div class="p-4 border-b border-gray-200 flex justify-between items-center bg-gray-50">
+    <h2 class="text-lg font-medium text-gray-800 flex items-center gap-2">
+      <!-- Ícone de cifrão -->
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3zm0 0V4m0 16v-4" />
+      </svg>
+      Pagamentos
+    </h2>
+  </div>
+  <div class="p-4">
+    <div *ngIf="pagamentosDoContrato.length === 0" class="text-gray-500 text-center py-8">
+      Nenhum pagamento encontrado para este contrato.
+    </div>
+    <div class="space-y-4" *ngIf="pagamentosDoContrato.length > 0">
+      <div
+      (click)="selecionarPagamento(pagamento)"
+      (keydown.enter)="selecionarPagamento(pagamento)"
+      *ngFor="let pagamento of pagamentosDoContrato"
+      [ngClass]="{
+        'bg-blue-100 ring-2 ring-blue-400': pagamentoSelecionado?.pagamento_id === pagamento.pagamento_id,
+        'hover:bg-gray-50 cursor-pointer transition-colors': pagamentoSelecionado?.pagamento_id !== pagamento.pagamento_id
+      }"
+      class="bg-white border border-gray-200 rounded-lg p-4"
+      >
+        <div class="flex justify-between items-start mb-2">
+          <div>
+            <h4 class="font-medium text-gray-800">
+              Pagamento #{{ pagamento.pagamento_id }}
+            </h4>
+            <p class="text-sm text-gray-500">
+              Vencimento: {{ pagamento.data_vencimento }}
+            </p>
+          </div>
+          <span class="px-2 py-1 text-xs font-semibold rounded-full"
+            [ngClass]="{
+              'bg-green-100 text-green-800': pagamento.status === 'PAGO',
+              'bg-yellow-100 text-yellow-800': pagamento.status === 'ABERTO',
+              'bg-blue-100 text-blue-800': pagamento.status === 'PAGO_COM_ATRASO',
+              'bg-red-100 text-red-800': pagamento.status === 'ATRASADO'
+            }">
+            {{ pagamento.status }}
+          </span>
+        </div>
+        @if (pagamentoSelecionado && pagamentoSelecionado.pagamento_id === pagamento.pagamento_id) {
+          <!-- Secao para adiciionar ou editar data do pagamento com input de calendario-->
+          <div class="mt-2">
+            <label for="data-pagamento" class="block text-sm font-medium text-gray-700">Data do Pagamento</label>
+            <input
+              id="data-pagamento"
+              type="date"
+              [(ngModel)]="pagamentoSelecionado.data_pagamento"
+              (change)="atualizarDataPagamento(pagamentoSelecionado)"
+              class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            />
+            <button
+            type="button"
+            (click)="atualizarDataPagamento(pagamentoSelecionado)"
+            class="mt-2 px-4 py-2 bg-blue-600 text-white rounded-md shadow-sm hover:bg-blue-700 transition-colors text-sm font-medium"
+            >
+              Salvar data
+            </button>
+          </div>
+        }
+        <div class="mt-2 flex justify-between items-center">
+          <div class="flex items-center gap-1 text-sm text-gray-500">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            <span *ngIf="pagamento.data_pagamento">Pago em {{ pagamento.data_pagamento }}</span>
+            <span *ngIf="!pagamento.data_pagamento">Não pago ainda</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="!contratoSelecionado" class="flex items-center justify-center h-full text-gray-500 py-8">
+  Selecione um contrato para ver os pagamentos.
+</div>

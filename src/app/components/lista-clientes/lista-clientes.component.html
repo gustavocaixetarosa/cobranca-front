@@ -30,12 +30,13 @@
     <div
       *ngFor="let client of clientes | filter:search:['name', 'email']"
       (click)="onSelectClient(client)"
+      (keydown.enter)="onSelectClient(client)"
       [ngClass]="selectedClient?.cliente_id === client.id
         ? 'bg-blue-50 border-l-4 border-blue-500'
         : 'hover:bg-gray-100 border-l-4 border-transparent'"
       class="px-4 py-3 cursor-pointer transition-colors"
     >
-      <h3 class="font-medium text-gray-800">{{ client.name }}</h3>
+      <h3 class="font-medium text-gray-800">{{ client.nome }}</h3>
       <p class="text-sm text-gray-500">{{ client.email }}</p>
     </div>
   </div>
