@@ -24,16 +24,16 @@
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 4H7a2 2 0 01-2-2V6a2 2 0 012-2h7l5 5v11a2 2 0 01-2 2z" />
         </svg>
-        Contratos ({{ contracts.length }})
+        Contratos ({{ contratosCliente.length }})
       </h2>
     </div>
-    <div *ngIf="contracts.length === 0" class="p-8 text-center text-gray-500">
+    <div *ngIf="contratosCliente.length === 0" class="p-8 text-center text-gray-500">
       <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto mb-2 h-8 w-8 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
       <p>No contracts found for this client</p>
     </div>
-    <div *ngIf="contracts.length > 0" class="overflow-x-auto">
+    <div *ngIf="contratosCliente.length > 0" class="overflow-x-auto">
       <table class="w-full">
         <thead>
           <tr class="bg-gray-50">
@@ -46,9 +46,11 @@
           </tr>
         </thead>
         <tbody class="divide-y divide-gray-200">
-          <tr *ngFor="let contract of contracts"
+          <tr *ngFor="let contract of contratosCliente"
               (click)="onSelectContract(contract)"
-              [ngClass]="selectedContract?.contrato_id === contract.contrato_id ? 'bg-blue-50' : 'hover:bg-gray-50 cursor-pointer transition-colors'">
+              (keydown.enter)="onSelectContract(contract)"
+              tabindex="0"
+              [ngClass]="contratoSelecionado && contratoSelecionado.contrato_id === contract.contrato_id ? 'bg-blue-50' : 'hover:bg-gray-50 cursor-pointer transition-colors'">
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">#{{ contract.contrato_id }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium">{{ contract.nome_contratante }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ contract.cpf_contratante }}</td>
