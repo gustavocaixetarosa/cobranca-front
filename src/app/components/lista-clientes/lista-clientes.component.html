@@ -1,1 +1,48 @@
-<p>lista-clientes works!</p>
+<div class="h-full bg-white border-r border-gray-200 flex flex-col">
+  <!-- Header -->
+  <div class="p-4 border-b border-gray-200">
+    <h1 class="text-xl font-semibold text-gray-800 flex items-center gap-2">
+      <!-- Ícone -->
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5V9H2v11h5M17 20a2 2 0 01-2 2H9a2 2 0 01-2-2m10 0V9m-4 11V9" />
+      </svg>
+      Clients
+    </h1>
+  </div>
+
+  <!-- Search -->
+  <div class="px-4 py-3 border-b border-gray-200">
+    <div class="relative">
+      <input
+        type="text"
+        placeholder="Search clients..."
+        [(ngModel)]="search"
+        class="w-full pl-9 pr-4 py-2 text-sm bg-gray-100 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+      />
+      <svg xmlns="http://www.w3.org/2000/svg" class="absolute left-3 top-2.5 h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z" />
+      </svg>
+    </div>
+  </div>
+
+  <!-- Client List -->
+  <div class="overflow-y-auto flex-grow">
+    <div
+      *ngFor="let client of clientes | filter:search:['name', 'email']"
+      (click)="onSelectClient(client)"
+      [ngClass]="selectedClient?.cliente_id === client.id
+        ? 'bg-blue-50 border-l-4 border-blue-500'
+        : 'hover:bg-gray-100 border-l-4 border-transparent'"
+      class="px-4 py-3 cursor-pointer transition-colors"
+    >
+      <h3 class="font-medium text-gray-800">{{ client.name }}</h3>
+      <p class="text-sm text-gray-500">{{ client.email }}</p>
+    </div>
+  </div>
+
+  <div class="p-4 border-t border-gray-200 bg-gray-50">
+    <div class="text-sm text-gray-500">
+      {{ clientes.length }} clients total
+    </div>
+  </div>
+</div>

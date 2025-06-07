@@ -1,8 +1,4 @@
-<div class="grid grid-cols-6">
-  <div class="col-span-1">
-    <lista-clientes></lista-clientes>
-  </div>
-  <div class="col-span-5">
-    <lista-contratos></lista-contratos>
-  </div>
+<div class="min-h-screen h-full grid lg:grid-cols-6 gap-4">
+  <lista-clientes (openClientContracts)="onClienteSelecionado($event)" class="h-full lg:col-span-1"></lista-clientes>
+  <lista-contratos [cliente]="clienteSelecionado" class="lg:col-span-5"></lista-contratos>
 </div>

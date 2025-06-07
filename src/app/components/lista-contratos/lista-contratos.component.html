@@ -1,1 +1,63 @@
-<p>lista-contratos works!</p>
+<div *ngIf="!cliente" class="min-h-screen flex-grow flex items-center justify-center bg-gray-800 p-8">
+  <div class="text-center text-gray-500">
+    <div class="flex justify-center mb-4">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 4H7a2 2 0 01-2-2V6a2 2 0 012-2h7l5 5v11a2 2 0 01-2 2z" />
+      </svg>
+    </div>
+    <h2 class="text-xl font-medium mb-2">No Client Selected</h2>
+    <p>Select a client from the sidebar to view their contracts</p>
+  </div>
+</div>
+<div *ngIf="cliente" class="flex-grow p-8 overflow-auto bg-gray-50">
+  <div class="mb-6">
+    <h1 class="text-2xl font-semibold text-gray-800">
+      {{ cliente.nome }}
+    </h1>
+    <p class="text-gray-500">
+      {{ cliente.email }} • {{ cliente.telefone }}
+    </p>
+  </div>
+  <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+    <div class="px-6 py-4 border-b border-gray-200 bg-gray-50">
+      <h2 class="text-lg font-medium text-gray-800 flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 4H7a2 2 0 01-2-2V6a2 2 0 012-2h7l5 5v11a2 2 0 01-2 2z" />
+        </svg>
+        Contratos ({{ contracts.length }})
+      </h2>
+    </div>
+    <div *ngIf="contracts.length === 0" class="p-8 text-center text-gray-500">
+      <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto mb-2 h-8 w-8 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      <p>No contracts found for this client</p>
+    </div>
+    <div *ngIf="contracts.length > 0" class="overflow-x-auto">
+      <table class="w-full">
+        <thead>
+          <tr class="bg-gray-50">
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nome Contratante</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">CPF</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Data</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Duração (meses)</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Valor</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200">
+          <tr *ngFor="let contract of contracts"
+              (click)="onSelectContract(contract)"
+              [ngClass]="selectedContract?.contrato_id === contract.contrato_id ? 'bg-blue-50' : 'hover:bg-gray-50 cursor-pointer transition-colors'">
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">#{{ contract.contrato_id }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium">{{ contract.nome_contratante }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ contract.cpf_contratante }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ contract.data }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ contract.duracao_em_meses }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">R$ {{ contract.valor_contrato | number:'1.2-2' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
