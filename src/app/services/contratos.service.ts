@@ -1,17 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Cliente } from '../models/cliente.interface';
+import { Contrato } from '../models/contract.interface';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ClientesService {
-
+export class ContratosService {
   apiUrl = 'http://localhost:8080';
 
   constructor(private readonly httpClient: HttpClient) { }
 
-  getClientes() {
-    return this.httpClient.get<Cliente[]>(`${this.apiUrl}/clientes`);
+  getContratos() {
+    return this.httpClient.get<Contrato[]>(`${this.apiUrl}/contratos`);
   }
 }

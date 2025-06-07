@@ -4,6 +4,7 @@ import { Pagamento } from '../../models/pagamento.interface';
 import { CommonModule } from '@angular/common';
 import { Contrato } from '../../models/contract.interface';
 import { FormsModule } from '@angular/forms';
+import { PagamentosService } from '../../services/pagamentos.service';
 
 @Component({
   selector: 'lista-pagamentos',
@@ -21,7 +22,11 @@ export class ListaPagamentosComponent implements OnChanges {
 
   @Output() fechar = new EventEmitter<void>();
 
-  constructor(private readonly elementRef: ElementRef) {}
+  constructor(private readonly pagamentoService: PagamentosService,private readonly elementRef: ElementRef) {
+    this.pagamentoService.getPagamentos().subscribe((pagamentos: Pagamento[]) => {
+      this.todosPagamentos = pagamentos;
+    });
+  }
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
@@ -36,7 +41,7 @@ export class ListaPagamentosComponent implements OnChanges {
   }
 
   atualizarDataPagamento(pagamento: Pagamento): void {
-
+    // todo
   }
 
   ngOnChanges(changes: SimpleChanges): void {
