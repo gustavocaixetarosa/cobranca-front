@@ -1,5 +1,4 @@
 import { Component, ElementRef, EventEmitter, HostListener, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { MOCK_PAGAMENTOS } from '../../../data/mock';
 import { Pagamento } from '../../models/pagamento.interface';
 import { CommonModule } from '@angular/common';
 import { Contrato } from '../../models/contract.interface';
@@ -14,7 +13,7 @@ import { PagamentosService } from '../../services/pagamentos.service';
   styleUrl: './lista-pagamentos.component.css'
 })
 export class ListaPagamentosComponent implements OnChanges {
-  todosPagamentos = MOCK_PAGAMENTOS;
+  @Input() todosPagamentos: Pagamento[] = [];
 
   @Input() contratoSelecionado: Contrato | null = null;
   pagamentoSelecionado: Pagamento | null = null;
@@ -22,11 +21,7 @@ export class ListaPagamentosComponent implements OnChanges {
 
   @Output() fechar = new EventEmitter<void>();
 
-  constructor(private readonly pagamentoService: PagamentosService,private readonly elementRef: ElementRef) {
-    this.pagamentoService.getPagamentos().subscribe((pagamentos: Pagamento[]) => {
-      this.todosPagamentos = pagamentos;
-    });
-  }
+  constructor(private readonly elementRef: ElementRef){}
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
@@ -37,7 +32,7 @@ export class ListaPagamentosComponent implements OnChanges {
 
   selecionarPagamento(pagamento: Pagamento): void {
     this.pagamentoSelecionado = pagamento;
-    console.log('Pagamento selecionado:', this.pagamentoSelecionado);
+    // console.log('Pagamento selecionado:', this.pagamentoSelecionado);
   }
 
   atualizarDataPagamento(pagamento: Pagamento): void {

@@ -1,11 +1,9 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { CommonModule } from '@angular/common';
 import { FilterPipe } from '../../pipes/filter.pipe';
 import { Cliente } from '../../models/cliente.interface';
-import { MOCK_CLIENTES } from '../../../data/mock';
-import { ClientesService } from '../../services/clientes.service';
 
 @Component({
   selector: 'lista-clientes',
@@ -20,22 +18,15 @@ import { ClientesService } from '../../services/clientes.service';
 })
 export class ListaClientesComponent {
 
-  clientes = MOCK_CLIENTES;
+  @Input() todosClientes: Cliente[] = [];
 
   selectedClient: Cliente | null = null;
   search: string = '';
   @Output() openClientContracts = new EventEmitter<any>();
 
-
-  constructor(private readonly clientService: ClientesService) {
-    this.clientService.getClientes().subscribe((clientes: Cliente[]) => {
-      this.clientes = clientes;
-    });
-  }
-
-
   onSelectClient(client: Cliente) {
     this.selectedClient = client;
     this.openClientContracts.emit(client);
   }
+
 }

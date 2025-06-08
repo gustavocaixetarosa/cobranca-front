@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from
 import { Cliente } from '../../models/cliente.interface';
 import { CommonModule } from '@angular/common';
 import { Contrato } from '../../models/contract.interface';
-import { MOCK_CONTRATOS } from '../../../data/mock';
 import { ContratosService } from '../../services/contratos.service';
 
 @Component({
@@ -16,19 +15,13 @@ export class ListaContratosComponent implements OnChanges{
 
   @Input() cliente: Cliente | null = null;
   contratosCliente: Contrato[] = [];
-  todosContratos: Contrato[] = MOCK_CONTRATOS;
+  @Input() todosContratos: Contrato[] = [];
   contratoSelecionado: Contrato | null = null;
 
   @Output() novoContratoSelecionado = new EventEmitter<Contrato>; // Substitua 'any' pelo tipo de evento que você deseja emitir
 
-  constructor(private readonly contratosService: ContratosService) {
-    this.contratosService.getContratos().subscribe((contratos: Contrato[]) => {
-      this.todosContratos = contratos;
-     })
-  }
-
   ngOnChanges(changes: SimpleChanges): void {
-      this.contratosCliente = this.todosContratos.filter(contrato => contrato.client_id === this.cliente?.cliente_id);
+      this.contratosCliente = this.todosContratos.filter(contrato => contrato.cliente_id === this.cliente?.cliente_id);
   }
 
   onSelectContract(contract: Contrato) {

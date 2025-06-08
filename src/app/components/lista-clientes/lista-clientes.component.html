@@ -28,7 +28,7 @@
   <!-- Client List -->
   <div class="overflow-y-auto flex-grow">
     <div
-      *ngFor="let client of clientes | filter:search:['name', 'email']"
+      *ngFor="let client of todosClientes | filter:search:['nome']"
       (click)="onSelectClient(client)"
       (keydown.enter)="onSelectClient(client)"
       [ngClass]="selectedClient?.cliente_id === client.id
@@ -43,7 +43,7 @@
 
   <div class="p-4 border-t border-gray-200 bg-gray-50">
     <div class="text-sm text-gray-500">
-      {{ clientes.length }} clients total
+      {{ todosClientes.length }} clients total
     </div>
   </div>
 </div>
