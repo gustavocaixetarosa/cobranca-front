@@ -14,4 +14,11 @@ export class PagamentosService {
   getPagamentos() {
     return this.httpCliente.get<Pagamento[]>(`${this.apiUrl}/pagamentos`);
   }
+
+  atualizarPagamento(pagamento: Pagamento) {
+    console.log('Atualizando pagamento:', pagamento);
+    return this.httpCliente.put<Pagamento>(`${this.apiUrl}/pagamentos/${pagamento.pagamento_id}`, pagamento);
+  }
+
+
 }

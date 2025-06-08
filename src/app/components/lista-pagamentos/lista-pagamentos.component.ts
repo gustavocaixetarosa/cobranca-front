@@ -21,7 +21,7 @@ export class ListaPagamentosComponent implements OnChanges {
 
   @Output() fechar = new EventEmitter<void>();
 
-  constructor(private readonly elementRef: ElementRef){}
+  constructor(private readonly elementRef: ElementRef, private readonly pagamentoService: PagamentosService){}
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
@@ -36,7 +36,15 @@ export class ListaPagamentosComponent implements OnChanges {
   }
 
   atualizarDataPagamento(pagamento: Pagamento): void {
-    // todo
+    this.pagamentoService.atualizarPagamento(pagamento).subscribe(
+      updatedPagamento => {
+        console.log('Pagamento atualizado:', updatedPagamento);
+      },
+        error => {
+        console.error('Erro ao atualizar pagamento:', error);
+      }
+    );
+    this.pagamentoService.getPagamentos();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
