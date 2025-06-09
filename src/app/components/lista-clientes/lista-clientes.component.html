@@ -1,13 +1,21 @@
 <div class="h-full bg-white border-r border-gray-200 flex flex-col">
   <!-- Header -->
   <div class="p-4 border-b border-gray-200">
-    <h1 class="text-xl font-semibold text-gray-800 flex items-center gap-2">
-      <!-- Ícone -->
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5V9H2v11h5M17 20a2 2 0 01-2 2H9a2 2 0 01-2-2m10 0V9m-4 11V9" />
-      </svg>
-      Clients
-    </h1>
+    <div class="flex items-center justify-between">
+      <h1 class="text-xl font-semibold text-gray-800 flex items-center gap-2">
+        <!-- Ícone -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5V9H2v11h5M17 20a2 2 0 01-2 2H9a2 2 0 01-2-2m10 0V9m-4 11V9" />
+        </svg>
+        Clients
+      </h1>
+      <!-- Add cliente with svg de adicao -->
+      <button routerLink="cliente/adicionar"  class="flex cursor-pointer items-center gap-2 px-3 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+        </svg>
+      </button>
+    </div>
   </div>
 
   <!-- Search -->
