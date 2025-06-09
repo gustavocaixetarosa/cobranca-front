@@ -12,6 +12,7 @@
     class="transition-all duration-300"
   ></lista-contratos>
   <lista-pagamentos
+    (atualizarDados)="atualizarDados()"
     [todosPagamentos]="todosOsPagamentos"
     *ngIf="contratoSelecionado"
     [contratoSelecionado]="contratoSelecionado"

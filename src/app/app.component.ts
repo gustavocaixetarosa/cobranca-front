@@ -37,7 +37,10 @@ export class AppComponent {
     private readonly contratosService: ContratosService,
     private readonly pagamentosService: PagamentosService
   ) {
-    // Inicialização ou carregamento de dados, se necessário
+    this.atualizarDados();
+  }
+
+  atualizarDados(){
     this.clientesService.getClientes().subscribe((clientes: Cliente[]) => {
       this.todosOsClientes = clientes;
     });
@@ -49,7 +52,6 @@ export class AppComponent {
       this.todosOsPagamentos = pagamentos;
     });
   }
-
   onClienteSelecionado(cliente: Cliente): void {
     this.clienteSelecionado = cliente;
   }

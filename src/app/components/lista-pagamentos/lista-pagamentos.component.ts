@@ -19,6 +19,7 @@ export class ListaPagamentosComponent implements OnChanges {
   pagamentoSelecionado: Pagamento | null = null;
   pagamentosDoContrato: Pagamento[] = [];
 
+  @Output() atualizarDados = new EventEmitter<void>();
   @Output() fechar = new EventEmitter<void>();
 
   constructor(private readonly elementRef: ElementRef, private readonly pagamentoService: PagamentosService){}
@@ -39,6 +40,7 @@ export class ListaPagamentosComponent implements OnChanges {
     this.pagamentoService.atualizarPagamento(pagamento).subscribe(
       updatedPagamento => {
         console.log('Pagamento atualizado:', updatedPagamento);
+        this.atualizarDados.emit();
       },
         error => {
         console.error('Erro ao atualizar pagamento:', error);
