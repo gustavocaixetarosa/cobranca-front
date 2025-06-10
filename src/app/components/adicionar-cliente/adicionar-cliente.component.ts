@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ClientesService } from '../../services/clientes.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'adicionar-cliente',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './adicionar-cliente.component.html',
   styleUrl: './adicionar-cliente.component.css'
 })
