@@ -29,7 +29,15 @@ export class AdicionarClienteComponent {
 
   onSubmit() {
     if (this.clienteForm.valid) {
-      this.ClientesService.adicionarCliente(this.clienteForm.value).subscribe({
+      const clienteRequest = {
+        "nome": this.clienteForm.value.nome,
+        "endereco": this.clienteForm.value.endereco,
+        "telefone": this.clienteForm.value.telefone,
+        "registro": this.clienteForm.value.cpf_cliente,
+        "dataContrato": this.clienteForm.value.data_vencimento,
+        "banco": this.clienteForm.value.banco
+      }
+      this.ClientesService.adicionarCliente(clienteRequest).subscribe({
         next: (response) => {
           console.log('Cliente adicionado com sucesso:', response);
           this.clienteForm.reset();

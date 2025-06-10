@@ -16,7 +16,7 @@ export class ClientesService {
     return this.httpClient.get<Cliente[]>(`${this.apiUrl}/clientes`);
   }
 
-  adicionarCliente(cliente: Cliente) {
-    return this.httpClient.post<Cliente>(`${this.apiUrl}/clientes`, cliente);
+  adicionarCliente(cliente: any) {
+    return this.httpClient.post<any>(`${this.apiUrl}/clientes`, cliente);
   }
 }
