@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FilterPipe } from '../../pipes/filter.pipe';
 import { Cliente } from '../../models/cliente.interface';
 import { RouterLink } from '@angular/router';
+import { BotaoComponent } from '../../ui/botao/botao.component';
 
 @Component({
   selector: 'lista-clientes',
@@ -13,7 +14,8 @@ import { RouterLink } from '@angular/router';
     CommonModule,
     FilterPipe,
     FormsModule,
-    RouterLink
+    RouterLink,
+    BotaoComponent
   ],
   templateUrl: './lista-clientes.component.html',
   styleUrl: './lista-clientes.component.css'

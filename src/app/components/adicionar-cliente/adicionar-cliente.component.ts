@@ -3,11 +3,17 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { CommonModule } from '@angular/common';
 import { ClientesService } from '../../services/clientes.service';
 import { RouterLink } from '@angular/router';
+import { BotaoComponent } from '../../ui/botao/botao.component';
 
 @Component({
   selector: 'adicionar-cliente',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    RouterLink,
+    BotaoComponent
+  ],
   templateUrl: './adicionar-cliente.component.html',
   styleUrl: './adicionar-cliente.component.css'
 })
