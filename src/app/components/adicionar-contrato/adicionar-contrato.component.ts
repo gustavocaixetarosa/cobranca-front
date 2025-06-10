@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { BotaoComponent } from '../../ui/botao/botao.component';
 import { ContratosService } from '../../services/contratos.service';
-import { error } from 'console';
 
 @Component({
   selector: 'adicionar-contrato',

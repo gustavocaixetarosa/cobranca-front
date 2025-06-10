@@ -46,7 +46,20 @@ export class ListaPagamentosComponent implements OnChanges {
         console.error('Erro ao atualizar pagamento:', error);
       }
     );
-    this.pagamentoService.getPagamentos();
+  }
+
+  atualizarDataVencimento(pagamento: Pagamento): void {
+
+    console.log('Atualizando data de vencimento para:', pagamento);
+    this.pagamentoService.atualizarPagamento(pagamento).subscribe(
+      updatedPagamento => {
+        console.log('Data de vencimento atualizada:', updatedPagamento);
+        this.atualizarDados.emit();
+      }
+      , error => {
+        console.error('Erro ao atualizar data de vencimento:', error);
+      }
+    );
   }
 
   ngOnChanges(changes: SimpleChanges): void {
