@@ -1,0 +1,118 @@
+<div class="max-w-lg mx-auto mt-8 bg-white p-6 rounded shadow">
+  <botao link="/">
+    <span class="text-gray-50">Voltar</span>
+  </botao>
+  <div>
+    <h2 class="mt-5 text-2xl font-bold mb-4">Adicionar Contrato</h2>
+    <p class="text-gray-600 mb-6">Preencha os detalhes do contrato para adicionar ao sistema.</p>
+  </div>
+
+  <form [formGroup]="contratoForm" (ngSubmit)="onSubmit()">
+    <div class="mb-4">
+      <label for="cliente_id" class="block text-gray-700">ID do Cliente</label>
+      <input
+        id="cliente_id"
+        formControlName="cliente_id"
+        type="number"
+        class="w-full border rounded px-3 py-2"
+        [ngClass]="{
+          'border-red-500 focus:border-red-500 focus:ring-red-500': contratoForm.get('cliente_id')?.invalid && (contratoForm.get('cliente_id')?.touched || contratoForm.get('cliente_id')?.dirty)
+        }"
+      />
+    </div>
+    <div class="mb-4">
+      <label for="nome_contratante" class="block text-gray-700">Nome do Contratante</label>
+      <input
+        id="nome_contratante"
+        formControlName="nome_contratante"
+        class="w-full border rounded px-3 py-2"
+        [ngClass]="{
+          'border-red-500 focus:border-red-500 focus:ring-red-500': contratoForm.get('nome_contratante')?.invalid && (contratoForm.get('nome_contratante')?.touched || contratoForm.get('nome_contratante')?.dirty)
+        }"
+      />
+      <div *ngIf="contratoForm.get('nome_contratante')?.invalid && (contratoForm.get('nome_contratante')?.touched || contratoForm.get('nome_contratante')?.dirty)" class="text-xs text-red-600 mt-1">
+        Nome do contratante é obrigatório.
+      </div>
+    </div>
+    <div class="mb-4">
+      <label for="cpf_contratante" class="block text-gray-700">CPF do Contratante</label>
+      <input
+        id="cpf_contratante"
+        formControlName="cpf_contratante"
+        class="w-full border rounded px-3 py-2"
+        [ngClass]="{
+          'border-red-500 focus:border-red-500 focus:ring-red-500': contratoForm.get('cpf_contratante')?.invalid && (contratoForm.get('cpf_contratante')?.touched || contratoForm.get('cpf_contratante')?.dirty)
+        }"
+      />
+      <div *ngIf="contratoForm.get('cpf_contratante')?.invalid && (contratoForm.get('cpf_contratante')?.touched || contratoForm.get('cpf_contratante')?.dirty)" class="text-xs text-red-600 mt-1">
+        CPF do contratante é obrigatório.
+      </div>
+    </div>
+    <div class="mb-4">
+      <label for="dataInicioContrato" class="block text-gray-700">Data do inicio do Contrato</label>
+      <input
+        id="dataInicioContrato"
+        formControlName="dataInicioContrato"
+        type="date"
+        class="w-full border rounded px-3 py-2"
+        [ngClass]="{
+          'border-red-500 focus:border-red-500 focus:ring-red-500': contratoForm.get('data')?.invalid && (contratoForm.get('data')?.touched || contratoForm.get('data')?.dirty)
+        }"
+      />
+      <div *ngIf="contratoForm.get('data')?.invalid && (contratoForm.get('data')?.touched || contratoForm.get('data')?.dirty)" class="text-xs text-red-600 mt-1">
+        Data do inicio contrato é obrigatória.
+      </div>
+    </div>
+    <div class="mb-4">
+      <label for="dataPrimeiraParcela" class="block text-gray-700">Data da Primeira Parcela</label>
+      <input
+        id="dataPrimeiraParcela"
+        formControlName="dataPrimeiraParcela"
+        type="date"
+        class="w-full border rounded px-3 py-2"
+        [ngClass]="{
+          'border-red-500 focus:border-red-500 focus:ring-red-500': contratoForm.get('dataPrimeiraParcela')?.invalid && (contratoForm.get('dataPrimeiraParcela')?.touched || contratoForm.get('dataPrimeiraParcela')?.dirty)
+        }"
+      />
+      <div *ngIf="contratoForm.get('dataPrimeiraParcela')?.invalid && (contratoForm.get('dataPrimeiraParcela')?.touched || contratoForm.get('dataPrimeiraParcela')?.dirty)" class="text-xs text-red-600 mt-1">
+        Data da primeira parcela é obrigatória.
+      </div>
+    </div>
+    <div class="mb-4">
+      <label for="duracao_em_meses" class="block text-gray-700">Duração (meses)</label>
+      <input
+        id="duracao_em_meses"
+        formControlName="duracao_em_meses"
+        type="number"
+        min="1"
+        class="w-full border rounded px-3 py-2"
+        [ngClass]="{
+          'border-red-500 focus:border-red-500 focus:ring-red-500': contratoForm.get('duracao_em_meses')?.invalid && (contratoForm.get('duracao_em_meses')?.touched || contratoForm.get('duracao_em_meses')?.dirty)
+        }"
+      />
+      <div *ngIf="contratoForm.get('duracao_em_meses')?.invalid && (contratoForm.get('duracao_em_meses')?.touched || contratoForm.get('duracao_em_meses')?.dirty)" class="text-xs text-red-600 mt-1">
+        Duração é obrigatória e deve ser maior que 0.
+      </div>
+    </div>
+    <div class="mb-4">
+      <label for="valor_contrato" class="block text-gray-700">Valor do Contrato</label>
+      <input
+        id="valor_contrato"
+        formControlName="valor_contrato"
+        type="number"
+        min="0.01"
+        step="0.01"
+        class="w-full border rounded px-3 py-2"
+        [ngClass]="{
+          'border-red-500 focus:border-red-500 focus:ring-red-500': contratoForm.get('valor_contrato')?.invalid && (contratoForm.get('valor_contrato')?.touched || contratoForm.get('valor_contrato')?.dirty)
+        }"
+      />
+      <div *ngIf="contratoForm.get('valor_contrato')?.invalid && (contratoForm.get('valor_contrato')?.touched || contratoForm.get('valor_contrato')?.dirty)" class="text-xs text-red-600 mt-1">
+        Valor do contrato é obrigatório e deve ser maior que 0.
+      </div>
+    </div>
+    <button type="submit" [disabled]="contratoForm.invalid" class="mt-5 cursor-pointer bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+      Adicionar Contrato
+    </button>
+  </form>
+</div>

@@ -13,4 +13,8 @@ export class ContratosService {
   getContratos() {
     return this.httpClient.get<Contrato[]>(`${this.apiUrl}/contratos`);
   }
+
+  adicionarContrato(contrato: any){
+    return this.httpClient.post<Contrato>(`${this.apiUrl}/contratos`, contrato);
+  }
 }
