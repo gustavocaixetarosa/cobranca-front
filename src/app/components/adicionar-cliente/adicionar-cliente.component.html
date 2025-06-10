@@ -1,1 +1,83 @@
-<p>adicionar-cliente works!</p>
+<div class="max-w-lg mx-auto mt-8 bg-white p-6 rounded shadow">
+  <form [formGroup]="clienteForm" (ngSubmit)="onSubmit()">
+    <div class="mb-4">
+      <label for="nome" class="block text-gray-700">Nome</label>
+      <input
+        id="nome"
+        name="nome"
+        formControlName="nome"
+        class="w-full border rounded px-3 py-2"
+        [ngClass]="{
+          'border-red-500 focus:border-red-500 focus:ring-red-500': clienteForm.get('nome')?.invalid && (clienteForm.get('nome')?.touched || clienteForm.get('nome')?.dirty)
+        }"
+      />
+      <div *ngIf="clienteForm.get('nome')?.invalid && (clienteForm.get('nome')?.touched || clienteForm.get('nome')?.dirty)" class="text-xs text-red-600 mt-1">
+        Nome é obrigatório.
+      </div>
+    </div>
+    <div class="mb-4">
+      <label for="cpf_cliente" class="block text-gray-700">CPF</label>
+      <input
+        id="cpf_cliente"
+        name="cpf_cliente"
+        formControlName="cpf_cliente"
+        class="w-full border rounded px-3 py-2"
+        [ngClass]="{
+          'border-red-500 focus:border-red-500 focus:ring-red-500': clienteForm.get('cpf_cliente')?.invalid && (clienteForm.get('cpf_cliente')?.touched || clienteForm.get('cpf_cliente')?.dirty)
+        }"
+      />
+      <div *ngIf="clienteForm.get('cpf_cliente')?.invalid && (clienteForm.get('cpf_cliente')?.touched || clienteForm.get('cpf_cliente')?.dirty)" class="text-xs text-red-600 mt-1">
+        CPF é obrigatório.
+      </div>
+    </div>
+    <div class="mb-4">
+      <label for="endereco" class="block text-gray-700">Endereço</label>
+      <input
+        id="endereco"
+        name="endereco"
+        formControlName="endereco"
+        class="w-full border rounded px-3 py-2"
+       >
+    </div>
+    <div class="mb-4">
+      <label for="telefone" class="block text-gray-700">Telefone</label>
+      <input
+        id="telefone"
+        formControlName="telefone"
+        class="w-full border rounded px-3 py-2"
+        [ngClass]="{
+          'border-red-500 focus:border-red-500 focus:ring-red-500': clienteForm.get('telefone')?.invalid && (clienteForm.get('telefone')?.touched || clienteForm.get('telefone')?.dirty)
+        }"
+      />
+      <div *ngIf="clienteForm.get('telefone')?.invalid && (clienteForm.get('telefone')?.touched || clienteForm.get('telefone')?.dirty)" class="text-xs text-red-600 mt-1">
+        Telefone é obrigatório.
+      </div>
+    </div>
+    <div class="mb-4">
+      <label for="data_vencimento" class="block text-gray-700">Data de Vencimento</label>
+      <input
+        id="data_vencimento"
+        formControlName="data_vencimento"
+        type="date"
+        class="w-full border rounded px-3 py-2"
+        [ngClass]="{
+          'border-red-500 focus:border-red-500 focus:ring-red-500': clienteForm.get('data_vencimento')?.invalid && (clienteForm.get('data_vencimento')?.touched || clienteForm.get('data_vencimento')?.dirty)
+        }"
+      />
+      <div *ngIf="clienteForm.get('data_vencimento')?.invalid && (clienteForm.get('data_vencimento')?.touched || clienteForm.get('data_vencimento')?.dirty)" class="text-xs text-red-600 mt-1">
+        Data de vencimento é obrigatória.
+      </div>
+    </div>
+    <div class="mb-4">
+      <label for="banco" class="block text-gray-700">Banco</label>
+      <input
+        id="banco"
+        formControlName="banco"
+        class="w-full border rounded px-3 py-2"
+       >
+    </div>
+    <button type="submit" [disabled]="clienteForm.invalid" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+      Adicionar Cliente
+    </button>
+  </form>
+</div>
