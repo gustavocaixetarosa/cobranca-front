@@ -22,6 +22,7 @@ import { BotaoComponent } from '../../ui/botao/botao.component';
 })
 export class ListaClientesComponent {
 
+  @Input() clientesComAtraso: number[] = [];
   @Input() todosClientes: Cliente[] = [];
 
   selectedClient: Cliente | null = null;

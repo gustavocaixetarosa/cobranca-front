@@ -15,7 +15,7 @@
       {{ cliente.nome }}
     </h1>
     <p class="text-gray-500">
-      {{ cliente.cpf_cliente }} • {{ cliente.telefone }}
+      {{ cliente.registro }} • {{ cliente.telefone }} • {{ cliente.endereco }} • {{ cliente.banco}}
     </p>
   </div>
   <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
@@ -61,7 +61,11 @@
               (click)="onSelectContract(contract)"
               (keydown.enter)="onSelectContract(contract)"
               tabindex="0"
-              [ngClass]="contratoSelecionado && contratoSelecionado.contrato_id === contract.contrato_id ? 'bg-blue-50' : 'hover:bg-gray-50 cursor-pointer transition-colors'">
+              [ngClass]="{
+                'bg-red-200 text-white': contratoAtrasado(contract),
+                'bg-blue-50': contratoSelecionado && contratoSelecionado.contrato_id === contract.contrato_id && !contratoAtrasado(contract),
+                'hover:bg-gray-50 cursor-pointer transition-colors': !contratoAtrasado(contract) && !(contratoSelecionado && contratoSelecionado.contrato_id === contract.contrato_id)
+              }">
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">#{{ contract.contrato_id }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium">{{ contract.nome_contratante }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ contract.cpf_contratante }}</td>

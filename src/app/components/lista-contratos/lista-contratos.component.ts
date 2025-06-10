@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from
 import { Cliente } from '../../models/cliente.interface';
 import { CommonModule } from '@angular/common';
 import { Contrato } from '../../models/contract.interface';
-import { ContratosService } from '../../services/contratos.service';
 import { BotaoComponent } from '../../ui/botao/botao.component';
 import { Router } from '@angular/router';
 
@@ -15,6 +14,7 @@ import { Router } from '@angular/router';
 })
 export class ListaContratosComponent implements OnChanges{
 
+  @Input() contratosComParcelaAtrasada: number[] = [];
   @Input() cliente: Cliente | null = null;
   contratosCliente: Contrato[] = [];
   @Input() todosContratos: Contrato[] = [];
@@ -22,7 +22,7 @@ export class ListaContratosComponent implements OnChanges{
 
   @Output() novoContratoSelecionado = new EventEmitter<Contrato>; // Substitua 'any' pelo tipo de evento que você deseja emitir
 
-  constructor(private router: Router){}
+  constructor(private readonly router: Router){}
 
   ngOnChanges(changes: SimpleChanges): void {
       this.contratosCliente = this.todosContratos.filter(contrato => contrato.cliente_id === this.cliente?.cliente_id);
@@ -31,6 +31,10 @@ export class ListaContratosComponent implements OnChanges{
   onSelectContract(contract: Contrato) {
     this.contratoSelecionado = contract;
     this.novoContratoSelecionado.emit(contract);
+  }
+
+  contratoAtrasado(contrato: Contrato): boolean {
+    return this.contratosComParcelaAtrasada.includes(contrato.contrato_id);
   }
 
   criarContrato(){

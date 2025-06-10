@@ -44,9 +44,11 @@
       *ngFor="let client of todosClientes | filter:search:['nome']"
       (click)="onSelectClient(client)"
       (keydown.enter)="onSelectClient(client)"
-      [ngClass]="selectedClient?.cliente_id === client.id
-        ? 'bg-blue-50 border-l-4 border-blue-500'
-        : 'hover:bg-gray-100 border-l-4 border-transparent'"
+      [ngClass]="{
+        'bg-red-200 text-white': clientesComAtraso.includes(client.cliente_id),
+        'bg-blue-50': selectedClient?.cliente_id === client.cliente_id && !clientesComAtraso.includes(client.cliente_id),
+        'hover:bg-gray-100 cursor-pointer transition-colors': !clientesComAtraso.includes(client.cliente_id) && selectedClient?.cliente_id !== client.cliente_id
+      }"
       class="px-4 py-3 cursor-pointer transition-colors"
     >
       <h3 class="font-medium text-gray-800">{{ client.nome }}</h3>

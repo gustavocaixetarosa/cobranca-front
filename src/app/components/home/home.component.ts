@@ -31,6 +31,9 @@ export class HomeComponent {
   clienteSelecionado: Cliente | null = null;
   contratoSelecionado: Contrato | null = null;
 
+  clientesComAtraso: number[] = [];
+  contratosComParcelaAtrasada: number[] = [];
+
   constructor(
     private readonly clientesService: ClientesService,
     private readonly contratosService: ContratosService,
@@ -48,8 +51,12 @@ export class HomeComponent {
     });
     this.pagamentosService.getPagamentos().subscribe((pagamentos: Pagamento[]) => {
       this.todosOsPagamentos = pagamentos;
+      this.clientesComAtraso = this.getClientesComAtraso();
+      this.contratosComParcelaAtrasada = this.getContratosComParcelaAtrasada();
     });
+
   }
+
   onClienteSelecionado(cliente: Cliente): void {
     this.clienteSelecionado = cliente;
   }
@@ -57,4 +64,23 @@ export class HomeComponent {
   onContratoSelecionado(contrato: Contrato): void {
     this.contratoSelecionado = contrato;
   }
+
+  getContratosComParcelaAtrasada(): number[] {
+    const contratrosComParcelaAtrasada: number[] = this.todosOsPagamentos
+    .filter(pagamento => pagamento.status === 'ATRASADO')
+      .map(pagamento => pagamento.contrato_id);
+
+    const uniqueContratos = new Set(contratrosComParcelaAtrasada);
+    return uniqueContratos ? Array.from(uniqueContratos) : [];
+  }
+
+  getClientesComAtraso(): number[] {
+    const idContratosAtrasados = this.getContratosComParcelaAtrasada();
+    const contratosAtrasados = this.todosOsContratos.filter(contrato => idContratosAtrasados.includes(contrato.contrato_id));
+    const clientesComAtraso = contratosAtrasados.map(contrato => contrato.cliente_id);
+    const uniqueClientes = new Set(clientesComAtraso);
+    return uniqueClientes ? Array.from(uniqueClientes) : [];
+  }
+
+
 }

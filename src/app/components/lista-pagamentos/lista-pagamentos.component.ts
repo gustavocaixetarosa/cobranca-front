@@ -14,15 +14,18 @@ import { PagamentosService } from '../../services/pagamentos.service';
 })
 export class ListaPagamentosComponent implements OnChanges {
   @Input() todosPagamentos: Pagamento[] = [];
-
   @Input() contratoSelecionado: Contrato | null = null;
+
   pagamentoSelecionado: Pagamento | null = null;
   pagamentosDoContrato: Pagamento[] = [];
 
   @Output() atualizarDados = new EventEmitter<void>();
   @Output() fechar = new EventEmitter<void>();
 
-  constructor(private readonly elementRef: ElementRef, private readonly pagamentoService: PagamentosService){}
+  constructor(
+    private readonly elementRef: ElementRef,
+    private readonly pagamentoService: PagamentosService
+  ){}
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
@@ -33,7 +36,6 @@ export class ListaPagamentosComponent implements OnChanges {
 
   selecionarPagamento(pagamento: Pagamento): void {
     this.pagamentoSelecionado = pagamento;
-    // console.log('Pagamento selecionado:', this.pagamentoSelecionado);
   }
 
   atualizarDataPagamento(pagamento: Pagamento): void {
@@ -49,7 +51,6 @@ export class ListaPagamentosComponent implements OnChanges {
   }
 
   atualizarDataVencimento(pagamento: Pagamento): void {
-
     console.log('Atualizando data de vencimento para:', pagamento);
     this.pagamentoService.atualizarPagamento(pagamento).subscribe(
       updatedPagamento => {
