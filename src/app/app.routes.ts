@@ -8,7 +8,7 @@ export const routes: Routes = [
     component: HomeComponent,
   },
   {
-    path: 'clientes/adicionar',
+    path: 'clientes/novo',
     component: AdicionarClienteComponent
   }
 ];

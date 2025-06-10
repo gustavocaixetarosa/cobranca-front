@@ -3,11 +3,12 @@ import { Cliente } from '../../models/cliente.interface';
 import { CommonModule } from '@angular/common';
 import { Contrato } from '../../models/contract.interface';
 import { ContratosService } from '../../services/contratos.service';
+import { BotaoComponent } from '../../ui/botao/botao.component';
 
 @Component({
   selector: 'lista-contratos',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, BotaoComponent],
   templateUrl: './lista-contratos.component.html',
   styleUrl: './lista-contratos.component.css'
 })
