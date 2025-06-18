@@ -14,7 +14,6 @@ import { BotaoComponent } from '../../ui/botao/botao.component';
     CommonModule,
     FilterPipe,
     FormsModule,
-    RouterLink,
     BotaoComponent
   ],
   templateUrl: './lista-clientes.component.html',
