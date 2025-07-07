@@ -65,9 +65,9 @@ export class ListaPagamentosComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.contratoSelecionado) {
-      this.pagamentosDoContrato = this.todosPagamentos.filter(
-        pagamento => pagamento.contrato_id === this.contratoSelecionado?.contrato_id
-      );
+      this.pagamentosDoContrato = this.todosPagamentos
+      .filter(pagamento => pagamento.contrato_id === this.contratoSelecionado?.contrato_id)
+      .sort((a, b) => a.pagamento_id - b.pagamento_id);
     } else {
       this.pagamentosDoContrato = [];
     }
