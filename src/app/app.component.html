@@ -1,5 +1,11 @@
-<div class="h-10 flex items-center w-screen header-container">
-  <img width="40" height="40" src="logo.jpeg" alt="logo cp acessoria">
-  <h2 class="titulo">CP Acessoria e Cobrança </h2>
+<div class="h-10 flex items-center w-screen header-container justify-between px-4">
+  <div class="flex items-center gap-2">
+    <img width="40" height="40" src="logo.jpeg" alt="logo cp acessoria">
+    <h2 class="titulo">CP Acessoria e Cobrança</h2>
+  </div>
+  <nav class="titulo flex gap-4">
+    <a routerLink="/" routerLinkActive="font-bold text-blue-700" class="hover:underline">Dashboard</a>
+    <a routerLink="relatorios" routerLinkActive="font-bold text-blue-700" class="hover:underline">Relatorios</a>
+  </nav>
 </div>
 <router-outlet></router-outlet>
